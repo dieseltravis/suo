@@ -5,7 +5,7 @@
  *
  * All code is owned by contributors
  * Released under the MIT license
- * http://opensource.org/licenses/MIT
+ * https://github.com/dieseltravis/suo/blob/master/LICENSE
  * 
  * Date: 2014-03-25
  */
