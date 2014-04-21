@@ -6,3 +6,15 @@ suo
 suo sews together your JSON data with handlebars templates to generate a static website.
 
 Usage: `node suo.js`
+
+Alternate usage: `node suo.js someotherdatafile.json`
+
+This is still very alpha.
+
+TODOs:
+
+  * so many callbacks
+  * not generic enough
+  * so many refactorings
+  
+Example site using suo: http://dieseltravis.github.io/

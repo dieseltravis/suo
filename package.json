@@ -1,13 +1,13 @@
 {
   "name": "suo",
   "version": "0.0.1",
-  "private": true,
+	"preferGlobal": true,
   "homepage": "https://github.com/dieseltravis/suo/",
-  "description": "Static website file generator for node.js",
+  "description": "a static website file generator for node.js",
 
   "author": {
     "name":  "Travis Hardiman",
-    "email": "travis.hardiman@gmail.com",
+    "email": "travis.hardiman+suo@gmail.com",
     "url":   "http://travis.servebeer.com/"
   },
 
@@ -23,18 +23,35 @@
   "scripts": {
     "start": "node suo.js"
   },
+
+	"main": "./suo.js",
+
+	"keywords": [
+		"suo",
+		"static",
+		"website"
+	],
   
   "dependencies": {
-    "fs": "*",
-    "async": "*",
-    "moment": "*",
-    "handlebars": "*"
+    "async": "~0.2.x",
+    "fs.extra": "~1.x",
+    "handlebars": "~2.x",
+		"html-minifier": "~0.5.x",
+    "moment": "~2.x",
+    "node-json-minify": "~0.1.x",
+		"uglify-js": "~2.x"
   },
+
+	"ruby-gems": [ "sass", "compass" ],
   
   "licenses": [
     {
       "type": "MIT",
       "url": "https://github.com/dieseltravis/suo/blob/master/LICENSE"
     }
-  ]
+  ],
+
+	"engines": {
+		"node": ">=0.10.18"
+	}
 }

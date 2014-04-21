@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{{#pages}}
+	<url>
+		<loc>{{../host}}{{../app}}{{relativePath}}</loc>
+		<lastmod>{{{moment pubDate 'YYYY-MM-DD'}}}</lastmod>
+		<changefreq>{{changefreq}}</changefreq>{{! always, hourly, daily, weekly, monthly, yearly, never }}
+		<priority>{{priority}}</priority>{{! 1.0 - 0.1 }}
+	</url>
+{{/pages}}
+</urlset>

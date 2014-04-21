@@ -1,0 +1,17 @@
+(header)
+
+<main>
+	<article>
+		<hgroup>
+			<h3><time datetime="{{{moment pubDate 'toISOString'}}}" pubdate="pubdate">{{{moment pubDate 'YYYY-MM-DD'}}}</time></h3>
+			<h1><a href="{{parent.app}}{{relativePath}}">{{{title}}}</a></h1>
+			<h2>{{{subtitle}}}</h2>
+		</hgroup>
+
+		{{{body}}}
+      
+	</article>
+    
+</main>
+
+(footer)

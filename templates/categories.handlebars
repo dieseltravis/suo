@@ -1,0 +1,30 @@
+(header)
+
+<main>
+	<article>
+		<hgroup>
+			<h1>
+				<a href="{{app}}{{archiveFilter}}">{{title}} categorized pages</a>
+			</h1>
+		</hgroup>
+			<ol class="categories">
+			{{#each categorizedPages}}
+				<li>
+					<h2>{{@key}}</h2>
+					<ol>
+					{{#each this}}
+						<li>
+							<a href="{{app}}{{relativePath}}">
+								<time datetime="{{{moment pubDate 'toISOString'}}}" pubdate="pubdate">{{{moment pubDate 'YYYY-MM-DD'}}}</time>: 
+								{{title}}
+							</a>
+						</li>
+					{{/each}}
+					</ol>
+				</li>
+			{{/each}}
+			</ol>
+	</article>    
+</main>
+
+(footer)

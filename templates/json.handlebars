@@ -1,0 +1,45 @@
+{
+	"relativePath": "{{relativePath}}",
+	"comments": "{{comments}}",
+	"pubDate": "{{pubDate}}",
+	"title": "{{title}}",
+	"subtitle": "{{subtitle}}",
+	"intro": "{{intro}}",
+	"categories": [
+		{{#categories}}
+			{{#if @index}}, {{/if}}
+			"{{.}}"
+		{{/categories}}
+	],
+	"body": "{{body}}",
+	"enclosures": [
+		{{#enclosures}}
+			{{#if @index}}, {{/if}}
+			{
+				"url": "{{url}}",
+				"bytes": {{bytes}},
+				"mime": "{{mime}}"
+			}
+		{{/enclosures}}
+	],
+	"source": {
+		"url":"{{source.url}}",
+		"title":"{{source.title}}"
+	},
+	"changefreq": "{{changefreq}}",
+	"priority": "{{priority}}",
+
+	"bodyArticleHtml": "<hgroup><h3><time datetime=\"{{{moment pubDate 'toISOString'}}}\" pubdate=\"pubdate\">{{{moment pubDate 'YYYY-MM-DD'}}}</time></h3><h1><a href=\"{{parent.host}}{{parent.app}}{{relativePath}}\">{{title}}</a></h1><h2>{{subtitle}}</h2></hgroup>{{{body}}}",
+	"bodyNavItems": [
+		{{#bodyNavItems}}
+			{{#if @index}}, {{/if}}
+			{
+				{{#if pageRel}}
+					"pageRel": "{{pageRel}}",
+				{{/if}}
+				"href": "{{../parent.app}}{{relativePath}}",
+				"text": "{{title}}"
+			}
+		{{/bodyNavItems}}
+	]
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{title}}</title>
+  <link href="{{host}}{{app}}{{home}}"/>
+  <link rel="self" href="{{host}}{{app}}/atom.atom" />
+  <updated>{{{moment environment.now 'toISOString'}}}</updated>
+  <author>
+    <name>{{author}}</name>
+    <email>{{authorEmail}}</email>
+    <uri>{{host}}{{app}}/about/</uri>
+  </author>
+  <id>{{host}}{{app}}</id>
+  <generator uri="{{environment.url}}" version="{{environment.version}}">{{environment.name}}</generator>
+  {{#categories}}
+    <category term="{{.}}" />
+  {{/categories}}
+  <icon>{{host}}{{app}}{{image}}</icon>
+  <logo>{{host}}{{app}}/{{config.images}}{{logo}}</logo>
+  <rights>{{copyright}}</rights>
+  <subtitle>{{description}}</subtitle>
+
+{{#pages}}
+	<entry>
+		<title>{{title}}</title>
+		<link href="{{../host}}{{../app}}{{relativePath}}" />
+		<id>{{../host}}{{../app}}{{relativePath}}</id>
+		<published>{{{moment pubDate 'toISOString'}}}</published>
+		<updated>{{{moment (coalesce update pubDate) 'toISOString'}}}</updated>
+		<summary>{{intro}}</summary>
+		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">{{{body}}}</div></content>
+		<author>
+			<name>{{{coalesce author ../author}}}</name>
+			<email>{{{coalesce authorEmail ../authorEmail}}}</email>
+			<uri>{{../host}}{{../app}}/about/</uri>
+		</author>
+		{{#categories}}
+			<category term="{{.}}" />
+		{{/categories}}
+	</entry>
+{{/pages}}
+
+</feed>

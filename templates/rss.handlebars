@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+	<title>{{title}}</title>
+	<description>{{description}}</description>
+	<link>{{host}}{{app}}{{home}}</link>
+	<atom:link href="{{host}}{{app}}/rss.rss" rel="self" type="application/rss+xml" />
+	<language>{{lang}}</language>
+	<copyright>{{copyright}}</copyright>
+	<lastBuildDate>{{{moment environment.now 'rfc1123'}}}</lastBuildDate>
+	<pubDate>{{{moment environment.now 'rfc1123'}}}</pubDate>
+	<ttl>{{ttl}}</ttl>
+	<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+	{{#categories}}
+		<category>{{.}}</category>
+	{{/categories}}
+	<image>
+		<url>{{host}}{{app}}{{logo}}</url>
+		<title>{{title}}</title>
+		<link>{{host}}{{app}}{{home}}</link>
+	</image>
+	<rating>{{rating}}</rating>
+	<generator>{{environment.name}} {{environment.version}} {{environment.url}}</generator>
+	<managingEditor>{{editor}} ({{{coalesce editorName author}}})</managingEditor>
+	<webMaster>{{webmaster}} ({{{coalesce webmasterName author}}})</webMaster>
+
+	{{#pages}}
+	<item>
+		<title>{{title}}</title>
+		<description>{{intro}}</description>
+		<link>{{../host}}{{../app}}{{relativePath}}</link>
+		<guid>{{../host}}{{../app}}{{relativePath}}</guid>
+		<pubDate>{{{moment pubDate 'rfc1123'}}}</pubDate>
+		<author>{{{coalesce authorEmail ../authorEmail}}} ({{{coalesce author ../author}}})</author>
+		{{#categories}}
+			<category>{{.}}</category>
+		{{/categories}}
+		<comments>{{../host}}{{../app}}{{relativePath}}#disqus_thread</comments>
+		{{#enclosures}}
+			<enclosure url="{{url}}" length="{{bytes}}" type="{{mime}}" />
+		{{/enclosures}}
+		<source url="{{source.url}}">{{source.title}}</source>
+	</item>
+	{{/pages}}
+</channel>
+</rss>

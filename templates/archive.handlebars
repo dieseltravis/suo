@@ -1,0 +1,26 @@
+(header)
+
+<main>
+	<article>
+		<hgroup>
+			<h1>
+				<a href="{{app}}{{archiveFilter}}">{{title}} archive for {{archiveFilter}}</a>
+			</h1>
+		</hgroup>
+		<ol>
+			{{#orderedPosts}}
+				{{#if (startsWith relativePath ../archiveFilter)}}
+					<li>
+						<a href="{{app}}{{relativePath}}">
+							<time datetime="{{{moment pubDate 'toISOString'}}}" pubdate="pubdate">{{{moment pubDate 'YYYY-MM-DD'}}}</time>: 
+							{{title}}
+						</a>
+					</li>
+				{{/if}}
+			{{/orderedPosts}}
+		</ol>
+	</article>
+    
+</main>
+
+(footer)
