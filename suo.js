@@ -5,7 +5,7 @@
  * Released under the MIT license: 
  * https://github.com/dieseltravis/suo/blob/master/LICENSE
  * 
- * Date: 2014-04-21
+ * Date: 2014-03-31
  */
 /* jshint strict: true */
 /*jslint passfail: false, regexp: true, plusplus: true, white: true, maxerr: 100, maxlen: 120 */
@@ -61,7 +61,7 @@
 		moment = require('moment'),
 		handlebars = require('handlebars'),
 		zlib = require('zlib'),
-		EasyZip = require('easy-zip').EasyZip,
+		AdmZip = require('adm-zip'),
 
 		handleError = function (err, name) {
 			if (err) {
@@ -277,6 +277,10 @@
 			dateTime = handlebars.Utils.escapeExpression(dateTime);
 			momentFunction  = handlebars.Utils.escapeExpression(momentFunction);
 
+			if (typeof dateTime === 'string') {
+				dateTime = new Date(dateTime);
+			}
+
 			// RFC 1123 Pattern e.g. Thu, 10 Apr 2008 13:30:00 GMT  
 			var result = (momentFunction === 'rfc1123') ?
 				moment(dateTime).utc().format('ddd, DD MMM YYYY HH:mm:ss \\G\\M\\T') :
@@ -305,24 +309,13 @@
 			var arg = 'error', i, l, el;
 			for (i = 0, l = arguments.length; i < l; i++) {
 				el = handlebars.Utils.escapeExpression(arguments[i]);
-				//console.log('arguments[' + i + '] ' + arguments[i] + ' --> ' + el);
 				if (el !== undefined && el !== null && el !== '') {
 					arg = el;
-					//console.log(arguments[i]);
 					i = l + 1;
 					break;
 				}
 			}
-			/*
-			var argArray = Array.prototype.slice.call(arguments),
-				args = argArray.filter(function (el) {
-				return el !== undefined && el !== null && el !== '';
-			});
-			args.shift();
-			var arg = args[0] || '';
-			console.log(argArray);
-			arg = handlebars.Utils.escapeExpression(arg);
-			*/
+
 			return new handlebars.SafeString(arg);
 		},
 
@@ -633,21 +626,24 @@
 	console.log(env.now);
 	console.log(env.name + ', ' + env.version);
 
-	// possible future enhancement: 
 	// before copying, if files exist in destination, archive to zip and clean destination folder
 
 	async.series([function (as1_callback) {
 			fse.exists(cfg.destPath(), function (exists) {
 				if (exists) {
-					var ez = new EasyZip(),
-						zipFileName = 'backup-' + moment(env.now).format('YYYYMMDD-HHmm') + '.zip';
 
-					console.log('zipping up existing files into ' + zipFileName + '...');
-					ez.zipFolder(cfg.destPath(), function () {
-						ez.writeToFile(cfg.path('/' + zipFileName));
-						as1_callback(null);
-					});
+					var zip = new AdmZip(),
+						previousDestination = cfg.destPath(),
+						zipFileName = 'backup-' + moment(env.now).format('YYYYMMDD-HHmmss') + '.zip';
+					
+					console.log('zipping up existing files from ' + previousDestination + '...');
+					zip.addLocalFolder(previousDestination);
+
+					console.log('writing zip file ' + zipFileName + '...');
+					zip.writeZip(zipFileName);
+					as1_callback(null);
 				} else {
+					console.log('skipping zip...');
 					as1_callback(null);
 				}
 			});
@@ -656,9 +652,24 @@
 			fse.exists(cfg.destPath(), function (exists) {
 				if (exists) {
 					console.log('removing existing files...');
-					fse.remove(cfg.destPath(), as2_callback);
+					fse.remove(cfg.destPath(), function (err) {
+						handleError(err, 'removing existing files task');
+						as2_callback(null);
+					});
 				} else {
+					console.log('skipping destination clean...');
 					as2_callback(null);
+				}
+			});
+		},
+		function (as2_5_callback) {
+			fse.exists(cfg.destPath(), function (exists) {
+				if (!exists) {
+					console.log('recreating destination folder...');
+					fse.mkdir(cfg.destPath(), function (err) {
+						handleError(err, 'recreating destination folder task');
+						as2_5_callback(null);
+					});
 				}
 			});
 		},
