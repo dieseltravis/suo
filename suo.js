@@ -162,6 +162,8 @@
 						}
 					}
 					async.parallel(functions, getAsyncCallback('getFileVersionerCss', gfvc_callback));
+				} else {
+					gfvc_callback(null);
 				}
 			};
 		},
@@ -184,6 +186,8 @@
 						}
 					}
 					async.parallel(functions, getAsyncCallback('getFileVersionerJs', gfvj_callback));
+				} else {
+					gfvj_callback(null);
 				}
 			};
 		},

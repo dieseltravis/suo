@@ -1,0 +1,134 @@
+{
+  "site" : {
+    "title": "site title",
+    "description": "some sort of tagline or description",
+    "host": "http://a.domain.com",
+    "app": "",
+    "home": "/",
+    "lang": "en-us",
+    "ttl": 43200,
+    "categories": ["various", "tags", "go", "here"],
+    "copyright": "© 2014.",
+    "legal": "Lorem ipsum legal text",
+    "image": "/favicon.ico",
+    "logo": "/i/logo.png",
+    "author": "Your Name",
+    "authorEmail": "your.email+author@domain.com",
+    "editor": "your.email+editor@domain.com",
+    "webmaster": "your.email+webmaster@domain.com",
+    "pages": [
+      {
+         "relativePath": "/posts/2014/04/21/hello-world",
+         "pubDate": "2014-04-21T04:04:04.0404040-04:00",
+         "title": "Hello World",
+         "subtitle": "This is a subtitle.",
+         "intro": "This is an intro.",
+         "description": "First post using the node js script that made this site: suo.",
+         "categories": ["blog", "post", "new"],
+         "body": "<p>Lorem ipsum</p><p>TODOs:</p><ul><li>post more stuff</li><li><del>import old stuff</del></li></ul>",
+         "enclosures": [],
+         "source": {
+           "url":"https://github.com/dieseltravis/suo",
+           "title":"dieseltravis / suo"
+         },
+         "changefreq": "monthly",
+         "priority": "1.0",
+         "templates": [ "json", "page" ]
+      },
+
+			{
+         "relativePath": "/notfound",
+				 "redirects": [ "/404.html", "/404/index.html" ],
+				 "isHidden": true,
+         "pubDate": "2014-04-05T04:04:04.0404040-04:00",
+         "title": "Some sort of not found error",
+         "subtitle": "I don't know man.",
+         "intro": "404? Oops.",
+         "description": "404 not found error",
+         "categories": ["404", "error"],
+         "body": "<p>This is probably the last place you want to be. I'm sorry, but whatever you were looking for is broken or gone.</p>",
+         "enclosures": [],
+         "source": {
+           "url":"https://github.com/dieseltravis/suo",
+           "title":"dieseltravis / suo"
+         },
+         "changefreq": "never",
+         "priority": "0.0",
+         "templates": [ "json", "page" ]
+      },
+			{
+         "relativePath": "/error",
+				 "redirects": [ "/500.html", "/500/index.html" ],
+				 "isHidden": true,
+         "pubDate": "2014-04-04T04:04:04.0404040-04:00",
+         "title": "Some sort of http or server error",
+         "subtitle": "I don't know man, error or something.",
+         "intro": "400-something? 500-something? Ouch.",
+         "description": "Error",
+         "categories": ["500", "400", "error"],
+         "body": "<p>Oh damn, I really screwed this one up, eh?</p>",
+         "enclosures": [],
+         "source": {
+           "url":"https://github.com/dieseltravis/suo",
+           "title":"dieseltravis / suo"
+         },
+         "changefreq": "never",
+         "priority": "0.0",
+         "templates": [ "json", "page" ]
+      }
+    ],
+
+    "templates": [
+      {
+        "id": "json",
+        "templateFile": "./templates/json.handlebars",
+        "destination": "./www{{parent/app}}{{relativePath}}/json.json"
+      },
+      {
+        "id": "page",
+        "templateFile": "./templates/page.handlebars",
+        "destination": "./www{{parent/app}}{{relativePath}}/index.html"
+      },
+      {
+        "id": "archive",
+        "templateFile": "./templates/archive.handlebars",
+        "destination": "./www{{app}}{{archiveFilter}}/index.html"
+      },
+      {
+        "id": "categories",
+        "templateFile": "./templates/categories.handlebars",
+        "destination": "./www{{app}}/categories/index.html"
+      },
+      {
+        "id": "home",
+        "templateFile": "./templates/home.handlebars",
+        "destination": "./www{{app}}/index.html"
+      },
+      {
+        "id": "sitemap",
+        "templateFile": "./templates/sitemap.handlebars",
+        "destination": "./www{{app}}/sitemap.xml"
+      },
+      {
+        "id": "manifest",
+        "templateFile": "./templates/manifest.handlebars",
+        "destination": "./www{{app}}/manifest.webapp"
+      },
+      {
+        "id": "rss",
+        "templateFile": "./templates/rss.handlebars",
+        "destination": "./www{{app}}/rss.rss"
+      },
+      {
+        "id": "atom",
+        "templateFile": "./templates/atom.handlebars",
+        "destination": "./www{{app}}/atom.atom"
+      },
+      {
+        "id": "redirect",
+        "templateFile": "./templates/redirect.handlebars",
+        "destination": "./www{{parent.app}}{{currentRedirect}}"
+      }
+    ]
+  }
+}
