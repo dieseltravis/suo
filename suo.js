@@ -432,7 +432,10 @@
 							break;
 					}
 				}
-				fse.outputFile(dest, fileText, saveFileHandler(dest, gfh_callback));
+				// async has issues with this for some reason
+				//fse.outputFile(dest, fileText, saveFileHandler(dest, gfh_callback));
+				fse.outputFileSync(dest, fileText);
+				gfh_callback(null);
 			};
 		},
 		getTemplateProcessFunction = function (msg, templateId, data) {
@@ -487,7 +490,7 @@
 			return rows;
 		},
 		processPage = function (page, siteParent, allCategorizedPages, functions) {
-			var msg, i, l;
+			var msg, i, l, r;
 			// add reference to site object
 			page.parent = siteParent;
 			page.bodyNavItems = getFilteredList(dataObj.site.orderedPosts, cfg.navItemCount, 
@@ -509,10 +512,15 @@
 
 			// check for redirects
 			if (page.redirects && page.redirects.length > 0) {
-				for (i = 0, l = page.redirects.length; i < l; i++) {
-					page.currentRedirect = page.redirects[i];
-					msg = 'generating redirect ' + (i + 1) + ' of ' + l + '...';
-					functions.push(getTemplateProcessFunction(msg, 'redirect', page));
+				if (!dataObj.site.redirectAltPaths || !dataObj.site.redirectAltPaths.length) {
+					dataObj.site.redirectAltPaths = [ '' ];
+				}
+				for (r = dataObj.site.redirectAltPaths.length; r--;) {
+					for (i = 0, l = page.redirects.length; i < l; i++) {
+						page.currentRedirect = dataObj.site.redirectAltPaths[r] + page.redirects[i];
+						msg = 'generating redirect ' + (i + 1) + ' of ' + l + '...';
+						functions.push(getTemplateProcessFunction(msg, 'redirect', page));
+					}
 				}
 			}
 		},
