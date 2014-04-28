@@ -417,7 +417,7 @@
 							fileText = htmlminifier.minify(fileText, {
 								removeComments: true,
 								collapseWhitespace: true,
-								useShortDoctype: true,
+								useShortDoctype: false,
 								keepClosingSlash: true,
 								minifyJS: true,
 								minifyCSS: true
@@ -584,6 +584,17 @@
 				msg = 'generating categories archive...';
 				functions.push(getTemplateProcessFunction(msg, 'categories', dataObj.site));
 
+				// home page using new home.handlebars
+				msg = 'generating home page...';
+				functions.push(getTemplateProcessFunction(msg, 'home', dataObj.site));
+
+				msg = 'generating manifest.webapp...';
+				functions.push(getTemplateProcessFunction(msg, 'manifest', dataObj.site));
+
+				// do sitemap last?
+				msg = 'generating sitemap...';
+				functions.push(getTemplateProcessFunction(msg, 'sitemap', dataObj.site));
+				
 				// rss/atom: order pages by date descending, only posts, limited number
 				dataObj.site.pages = orderedPosts.slice(0, cfg.syndicationMax);
 
@@ -592,17 +603,6 @@
 
 				msg = 'generating atom xml...';
 				functions.push(getTemplateProcessFunction(msg, 'atom', dataObj.site));
-
-				// home page using new home.handlebars
-				msg = 'generating home page...';
-				functions.push(getTemplateProcessFunction(msg, 'home', dataObj.site));
-
-				msg = 'generating manifest.webapp...';
-				functions.push(getTemplateProcessFunction(msg, 'manifest', dataObj.site));
-
-				// do sitemap last:
-				msg = 'generating sitemap...';
-				functions.push(getTemplateProcessFunction(msg, 'sitemap', dataObj.site));
 
 			}
 

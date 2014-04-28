@@ -67,16 +67,25 @@ Files & folders:
 
 Order of operation:
 
- 0: there are a few config settings at the top of suo.js, if the paths in the `files` directory have changed then they need to be updated
- 1: if files exist in the destination folder (`www`), they are archived
- 2: if files exist in the destination folder, they are deleted
- 3: if the destination folder doesn't exist it is created
- 4: assets are copied from the source folder (`files`)
- 5: css/scss and js files are versioned and renamed based on their date modified
- 6: the json data is parsed
- 6a:
- 7: the sitemap.xml file is gzipped
- 8: time elapsed is displayed
+0. there are a few config settings at the top of suo.js, if the paths in the `files` directory have changed then they need to be updated
+1. if files exist in the destination folder (`www`), they are archived
+2. if files exist in the destination folder, they are deleted
+3. if the destination folder doesn't exist it is created
+4. assets are copied from the source folder (`files`)
+5. css/scss and js files are versioned and renamed based on their date modified
+6. the json data is parsed
+ 1. helper functions for handlebars are registered:
+  1. `moment`: date/time helper that uses moment js
+	2. `startsWith`: boolean string function
+	3. `equals`: boolean string function
+	4. `coalesce`: inspired by SQL COALESCE, returns first non-null value
+	5. `static`: references the static files processed and returns the correct path/name
+	6. `gravatar`: returns gravatar hash for a given string
+ 2. handlebars templates from json data are processed
+ 3. pages from json data are processed
+ 4. list pages are processed: post archive, categories, rss/atom, home, manifest, sitemap
+7. the sitemap.xml file is gzipped
+8. time elapsed is displayed
 
 TODOs:
 
