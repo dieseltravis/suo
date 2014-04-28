@@ -74,16 +74,16 @@ Order of operation:
 4. assets are copied from the source folder (`files`)
 5. css/scss and js files are versioned and renamed based on their date modified
 6. the json data is parsed
- 1. helper functions for handlebars are registered:
-  1. `moment`: date/time helper that uses moment js
-  2. `startsWith`: boolean string function
-  3. `equals`: boolean string function
-  4. `coalesce`: inspired by SQL COALESCE, returns first non-null value
-  5. `static`: references the static files processed and returns the correct path/name
-  6. `gravatar`: returns gravatar hash for a given string
- 2. handlebars templates from json data are processed
- 3. pages from json data are processed
- 4. list pages are processed: post archive, categories, rss/atom, home, manifest, sitemap
+  1. helper functions for handlebars are registered:
+    1. `moment`: date/time helper that uses moment js
+    2. `startsWith`: boolean string function
+    3. `equals`: boolean string function
+    4. `coalesce`: inspired by SQL COALESCE, returns first non-null value
+    5. `static`: references the static files processed and returns the correct path/name
+    6. `gravatar`: returns gravatar hash for a given string
+  2. handlebars templates from json data are processed
+  3. pages from json data are processed
+  4. list pages are processed: post archive, categories, rss/atom, home, manifest, sitemap
 7. the sitemap.xml file is gzipped
 8. time elapsed is displayed
 
