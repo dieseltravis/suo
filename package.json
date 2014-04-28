@@ -1,7 +1,6 @@
 {
   "name": "suo",
   "version": "0.0.1",
-	"preferGlobal": true,
   "homepage": "https://github.com/dieseltravis/suo/",
   "description": "a static website file generator for node.js",
 
@@ -33,13 +32,14 @@
 	],
   
   "dependencies": {
+		"adm-zip": "~0.4.x",
     "async": "~0.2.x",
-    "fs.extra": "~1.x",
+    "fs.extra": "~1.2.x",
     "handlebars": "~2.x",
 		"html-minifier": "~0.5.x",
-    "moment": "~2.x",
+    "moment": "~2.6.x",
     "node-json-minify": "~0.1.x",
-		"uglify-js": "~2.x"
+		"uglify-js": "~2.4.x"
   },
 
 	"ruby-gems": [ "sass", "compass" ],
