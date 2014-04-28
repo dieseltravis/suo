@@ -76,11 +76,11 @@ Order of operation:
 6. the json data is parsed
  1. helper functions for handlebars are registered:
   1. `moment`: date/time helper that uses moment js
-	2. `startsWith`: boolean string function
-	3. `equals`: boolean string function
-	4. `coalesce`: inspired by SQL COALESCE, returns first non-null value
-	5. `static`: references the static files processed and returns the correct path/name
-	6. `gravatar`: returns gravatar hash for a given string
+  2. `startsWith`: boolean string function
+  3. `equals`: boolean string function
+  4. `coalesce`: inspired by SQL COALESCE, returns first non-null value
+  5. `static`: references the static files processed and returns the correct path/name
+  6. `gravatar`: returns gravatar hash for a given string
  2. handlebars templates from json data are processed
  3. pages from json data are processed
  4. list pages are processed: post archive, categories, rss/atom, home, manifest, sitemap
